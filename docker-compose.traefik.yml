@@ -1,7 +1,6 @@
 # For details and other explanations about this file refer to:
 # https://github.com/vrtmrz/obsidian-livesync/blob/main/docs/setup_own_server.md#traefik
 
-version: "2.1"
 services:
   couchdb:
     image: couchdb:latest
@@ -12,10 +11,7 @@ services:
       - COUCHDB_PASSWORD=${COUCHDB_PASSWORD}
     volumes:
       - ./data:/opt/couchdb/data
-      - ./local.ini:/opt/couchdb/etc/local.ini
-    # Ports not needed when already passed to Traefik
-    expose:
-     - 5984
+      - ./local.ini:/opt/couchdb/etc/local.ini:ro
     restart: unless-stopped
     networks:
       - dokploy-network
